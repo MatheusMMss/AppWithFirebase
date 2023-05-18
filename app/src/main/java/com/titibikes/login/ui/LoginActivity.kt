@@ -6,6 +6,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
 import com.google.firebase.auth.FirebaseAuth
 import com.titibikes.databinding.ActivityLoginBinding
 import com.titibikes.home.ui.MainActivity
@@ -18,6 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var callbackManager: CallbackManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +33,29 @@ class LoginActivity : AppCompatActivity() {
         binding.registerCreate.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
         }
+
+        binding.facebookLoginButton.setOnClickListener {
+            LoginManager.getInstance().logInWithReadPermissions(this, listOf("email"))
+        }
+        callbackManager = CallbackManager.Factory.create()
+
+        LoginManager.getInstance().registerCallback(callbackManager, object : FacebookCallback<com.facebook.login.LoginResult> {
+            override fun onSuccess(result: com.facebook.login.LoginResult) {
+                // Login bem-sucedido, realizar a autenticação no Firebase
+                val token = result.accessToken
+                loginViewModel.loginWithFacebook(token)
+            }
+
+            override fun onCancel() {
+                // Login cancelado pelo usuário
+                Toast.makeText(applicationContext, "Login cancelado pelo usuário", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onError(error: FacebookException) {
+                // Erro durante o login do Facebook
+                Toast.makeText(applicationContext, "Erro durante o login do Facebook", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         loginViewModel.loginResult.observe(this) { loginResult ->
