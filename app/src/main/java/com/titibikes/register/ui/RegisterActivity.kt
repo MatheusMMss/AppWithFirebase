@@ -73,6 +73,7 @@ class RegisterActivity : AppCompatActivity() {
                 } else {
                     val errorMessage = registrationResult.errorMessage
                     Toast.makeText(this@RegisterActivity, errorMessage, Toast.LENGTH_SHORT).show()
+                    binding.progressBar.visibility = View.GONE
                 }
             }
             binding.progressBar.visibility = View.VISIBLE

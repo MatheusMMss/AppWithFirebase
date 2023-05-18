@@ -1,5 +1,6 @@
 package com.titibikes.login.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -7,7 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.titibikes.databinding.ActivityLoginBinding
+import com.titibikes.home.ui.MainActivity
 import com.titibikes.login.ui.viewmodel.LoginViewModel
+import com.titibikes.register.ui.RegisterActivity
 import com.titibikes.utils.Validator
 
 class LoginActivity : AppCompatActivity() {
@@ -22,11 +25,15 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setupUi()
+        binding.registerCreate.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+        }
 
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
         loginViewModel.loginResult.observe(this) { loginResult ->
             if (loginResult.success) {
                 Toast.makeText(this, "Login realizado com sucesso!", Toast.LENGTH_SHORT).show()
+                startActivity(Intent(this, MainActivity::class.java))
             } else {
                 val errorMessage = loginResult.errorMessage
                 Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()

@@ -14,16 +14,20 @@ class LoginViewModel : ViewModel() {
         firebaseAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 val exception = task.exception
-                if (exception is FirebaseAuthInvalidUserException) {
-                    val errorCode = exception.errorCode
-                    if (errorCode == "ERROR_USER_NOT_FOUND") {
-                        loginResult.value =
-                            LoginResult(success = false, errorMessage = "Esta conta não existe")
-                        return@addOnCompleteListener
+                if (task.isSuccessful) {
+                    loginResult.value = LoginResult(success = true)
+                } else {
+                    if (exception is FirebaseAuthInvalidUserException) {
+                        val errorCode = exception.errorCode
+                        if (errorCode == "ERROR_USER_NOT_FOUND") {
+                            loginResult.value =
+                                LoginResult(success = false, errorMessage = "Esta conta não existe")
+                            return@addOnCompleteListener
+                        }
                     }
+                    val errorMessage = exception?.message ?: "Erro desconhecido"
+                    loginResult.value = LoginResult(success = false, errorMessage = errorMessage)
                 }
-                val errorMessage = exception?.message ?: "Erro desconhecido"
-                loginResult.value = LoginResult(success = false, errorMessage = errorMessage)
             }
     }
 }
