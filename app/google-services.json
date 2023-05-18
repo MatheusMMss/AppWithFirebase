@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "656058286266",
+    "project_id": "titibikes-3f5b4",
+    "storage_bucket": "titibikes-3f5b4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656058286266:android:1d0d2a99f0c04ba839c283",
+        "android_client_info": {
+          "package_name": "com.titibikes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656058286266-6hr95ukip0m6803uj58euvn6e28snqkh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgTlJEIDW4wNuPZ4DnGzc5bR8pqB8Pz-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "656058286266-6hr95ukip0m6803uj58euvn6e28snqkh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
