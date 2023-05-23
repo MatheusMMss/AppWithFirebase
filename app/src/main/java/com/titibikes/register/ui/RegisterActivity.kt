@@ -37,6 +37,7 @@ class RegisterActivity : AppCompatActivity() {
         btnRegister.setOnClickListener {
             val email = emailEditRegister.text.toString()
             val password = passwordEditRegister.text.toString()
+            val repeatPassword = repeatPasswordEditRegister.text.toString()
 
             if (!Validator.validateEmail(email)) {
                 emailEditRegister.error = "Preencha o E-mail corretamente"
@@ -56,6 +57,10 @@ class RegisterActivity : AppCompatActivity() {
             if (password.length < 6) {
                 passwordEditRegister.error = "A senha deve conter no mínimo 6 dígitos"
                 passwordEditRegister.requestFocus()
+                return@setOnClickListener
+            }
+            if (repeatPassword != password) {
+                repeatPasswordEditRegister.error = "Confirmação de senha está diferente"
                 return@setOnClickListener
             }
             registerViewModel.registerUser(

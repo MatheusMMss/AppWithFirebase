@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="Insira um Email:"
+            android:text="Insira um e-mail:"
             android:textColor="@color/orange"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -68,7 +68,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Insira uma Senha:"
+            android:text="Insira uma senha:"
             android:textColor="@color/orange"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -103,6 +103,46 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:id="@+id/title_repeat_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Insira a senha novamente:"
+            android:textColor="@color/orange"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/password_container_register" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/repeat_password_container_register"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="4dp"
+            android:textColorHint="@color/color_grey_darker"
+            android:theme="@style/TextInputLayoutStyle"
+            app:boxStrokeColor="@color/text_input_layout_color"
+            app:hintTextColor="@color/color_light_orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/title_repeat_password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/repeat_password_edit_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_login_password"
+                android:inputType="textPassword"
+                android:lines="1"
+                android:textColorHint="@color/color_grey_darker" />
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
@@ -119,7 +159,7 @@
             app:cornerRadius="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/password_container_register" />
+            app:layout_constraintTop_toBottomOf="@+id/repeat_password_container_register" />
 
         <ProgressBar
             android:id="@+id/progressBar"
